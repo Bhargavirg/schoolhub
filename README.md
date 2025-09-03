@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# School HUB - School Management System
 
-## Getting Started
+## Project Overview
+School HUB is a web-based school management system built with Next.js and React. It allows users to add, view, and manage schools with details such as name, address, city, state, contact number, email, and an image. The application uses a MySQL database to store school data and provides a responsive and user-friendly interface.
 
-First, run the development server:
+## Features
+- Add new schools with validation on input fields.
+- View a list of all schools with images and details.
+- Delete schools from the list.
+- Image upload functionality for each school.
+- Responsive design for desktop and mobile devices.
+- User authentication pages for admin and user sign-in/sign-up (placeholders in the app structure).
+- Uses Next.js app router and API routes for backend functionality.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Technologies Used
+- Next.js 13 with App Router
+- React 18
+- React Hook Form for form handling
+- Yup for form validation
+- MySQL with mysql2 for database connectivity
+- Multer for handling image uploads
+- Tailwind CSS for styling
+- TypeScript for type safety (partially)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation Instructions
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Prerequisites
+- Node.js (v16 or higher recommended)
+- npm (comes with Node.js)
+- MySQL server installed and running
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Setup Steps
 
-## Learn More
+1. Clone the repository or copy the project files to your local machine.
 
-To learn more about Next.js, take a look at the following resources:
+2. Navigate to the project directory:
+   ```bash
+   cd school-app
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Install the dependencies:
+   ```bash
+   npm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. Setup the MySQL database:
+   - Open your MySQL client and run the SQL script located at `setup.sql` to create the database and the `schools` table.
+   ```sql
+   CREATE DATABASE IF NOT EXISTS school_db;
+   USE school_db;
+   CREATE TABLE IF NOT EXISTS schools (
+     id INT AUTO_INCREMENT PRIMARY KEY,
+     name TEXT,
+     address TEXT,
+     city TEXT,
+     state TEXT,
+     contact VARCHAR(20),
+     image TEXT,
+     email_id VARCHAR(255)
+   );
+   ```
 
-## Deploy on Vercel
+5. Update the database connection details in `lib/db.js` if necessary (default user: root, password: Password@123#, database: school_db).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+6. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+7. Open your browser and navigate to:
+   ```
+   http://localhost:3000
+   ```
+
+## Usage
+- Use the "Add School" page to add new schools with all required details.
+- View the list of schools on the "Show Schools" page.
+- Click on a school to view detailed information and delete if needed.
+
+## Testing
+- The project currently does not include automated tests.
+- Manual testing is recommended by navigating through the pages, submitting forms, and verifying database updates.
+
+## Future Improvements
+- Add user authentication and authorization.
+- Implement automated tests.
+- Enhance UI/UX with more features and better responsiveness.
+- Add pagination and search functionality for schools.
+
+## License
+This project is open source and free to use.
+
+---
+
+If you have any questions or need assistance, feel free to reach out.
