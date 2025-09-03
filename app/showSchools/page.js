@@ -40,7 +40,7 @@ export default function ShowSchools() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 p-4">
-      <h1 className="text-3xl font-bold text-center mb-8 text-blue-600">Schools</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold text-center mb-8 text-blue-600">Schools</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {schools.map(school => (
           <div key={school.id} className="bg-white p-4 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition duration-300 relative" onClick={() => setSelectedSchool(school)}>

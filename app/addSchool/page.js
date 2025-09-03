@@ -53,8 +53,8 @@ export default function AddSchool() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-400 via-purple-500 to-pink-500 flex items-center justify-center p-4">
-      <div className="bg-white bg-opacity-95 p-8 rounded-2xl shadow-2xl w-full max-w-md">
-        <h1 className="text-3xl font-extrabold mb-6 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">Add School to School HUB</h1>
+      <div className="bg-white bg-opacity-95 p-4 sm:p-8 rounded-2xl shadow-2xl w-full max-w-md">
+        <h1 className="text-2xl sm:text-3xl font-extrabold mb-6 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">Add School to School HUB</h1>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-900">Name</label>

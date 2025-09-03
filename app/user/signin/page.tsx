@@ -13,9 +13,9 @@ export default function UserSignIn() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-pink-400 via-red-500 to-yellow-500 flex items-center justify-center p-8">
-      <div className="bg-white bg-opacity-90 rounded-xl shadow-lg p-8 w-full max-w-md">
-        <h1 className="text-3xl font-bold mb-6 text-center text-pink-700">User Sign In</h1>
+    <div className="min-h-screen bg-gradient-to-r from-pink-400 via-red-500 to-yellow-500 flex items-center justify-center p-4 sm:p-8">
+      <div className="bg-white bg-opacity-90 rounded-xl shadow-lg p-4 sm:p-8 w-full max-w-md">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-pink-700">User Sign In</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">Email</label>
