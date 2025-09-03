@@ -4,6 +4,7 @@ import path from 'path';
 import fs from 'fs';
 
 export async function POST(request) {
+  console.log('POST request received for adding school');
   try {
     const formData = await request.formData();
     const name = formData.get('name');
@@ -16,25 +17,32 @@ export async function POST(request) {
 
     let imagePath = '';
     if (imageFile && typeof imageFile.arrayBuffer === 'function') {
-      const buffer = Buffer.from(await imageFile.arrayBuffer());
-      const filename = Date.now() + path.extname(imageFile.name);
-      const dir = path.join(process.cwd(), 'public', 'schoolImages');
-      if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
+      try {
+        const buffer = Buffer.from(await imageFile.arrayBuffer());
+        const filename = Date.now() + path.extname(imageFile.name);
+        const dir = path.join(process.cwd(), 'public', 'schoolImages');
+        if (!fs.existsSync(dir)) {
+          fs.mkdirSync(dir, { recursive: true });
+        }
+        const filepath = path.join(dir, filename);
+        fs.writeFileSync(filepath, buffer);
+        imagePath = `/schoolImages/${filename}`;
+        console.log('Image uploaded successfully:', imagePath);
+      } catch (imageError) {
+        console.error('Image upload failed:', imageError);
+        // Continue without image
       }
-      const filepath = path.join(dir, filename);
-      fs.writeFileSync(filepath, buffer);
-      imagePath = `/schoolImages/${filename}`;
     }
 
     const query = 'INSERT INTO schools (name, address, city, state, contact, image, email_id) VALUES (?, ?, ?, ?, ?, ?, ?)';
     const values = [name, address, city, state, contact, imagePath, email_id];
 
     const [result] = await pool.execute(query, values);
+    console.log('School added to database:', result.insertId);
 
     return NextResponse.json({ message: 'School added successfully', id: result.insertId });
   } catch (error) {
-    console.error(error);
+    console.error('Error in POST:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

@@ -6,12 +6,21 @@ import Image from 'next/image';
 export default function ShowSchools() {
   const [schools, setSchools] = useState([]);
   const [selectedSchool, setSelectedSchool] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetch('/api/schools')
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch schools');
+        }
+        return res.json();
+      })
       .then(data => setSchools(data))
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+        setError(err.message);
+      });
   }, []);
 
   const handleDelete = async (id) => {
@@ -37,6 +46,14 @@ export default function ShowSchools() {
       }
     }
   };
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <p className="text-red-600 text-lg font-semibold">Error: {error}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 p-4">
